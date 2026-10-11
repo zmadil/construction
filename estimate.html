@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request an Estimate | Company Name</title>
+  <meta name="description" content="Request a free estimate for renovation, interior, concrete, asphalt, painting, landscaping or property work.">
+  <meta name="theme-color" content="#142c3e">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="estimate" class="page-estimate">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Free estimate</span>
+        <h1>Request an Estimate</h1>
+        <p>Tell us a bit about the project. We'll get back to you within one business day to schedule a visit.</p>
+      </div>
+    </section>
+
+    <section class="section bg-paper">
+      <div class="container estimate-layout">
+        <div class="form-card" id="form-card">
+          <h2>Project details</h2>
+          <p>Fields marked <span class="req">*</span> are required.</p>
+
+          <form id="estimate-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Name <span class="req">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="company">Company <span class="opt">(optional)</span></label>
+                <input id="company" name="company" type="text" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="req">*</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="req">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field full">
+                <label for="address">Project address <span class="req">*</span></label>
+                <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Street, city" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field full">
+                <label for="type">Type of work <span class="req">*</span></label>
+                <select id="type" name="type" required>
+                  <option value="">Select one…</option>
+                </select>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field full">
+                <label for="description">Project description <span class="req">*</span></label>
+                <textarea id="description" name="description" placeholder="What would you like done? Rough size, timeline, anything we should know." required></textarea>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field full">
+                <span class="label" id="photos-label">Photos <span class="opt">(optional, up to 8)</span></span>
+                <div class="dropzone">
+                  <input id="photos" name="photos" type="file" accept="image/*" multiple aria-labelledby="photos-label">
+                  <span data-icon="upload"></span>
+                  <strong>Tap to add photos or drag them here</strong>
+                  <span>Photos of the area help us give a more accurate estimate. JPG, PNG or HEIC, up to 10 MB each.</span>
+                </div>
+                <span class="field-error" id="photos-error" role="alert"></span>
+                <div class="previews" id="previews"></div>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="website">Leave this empty</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-foot">
+              <button class="btn btn-gold btn-lg" type="submit">Send Request <span data-icon="arrow"></span></button>
+              <small>We'll only use your details to respond to this request.</small>
+            </div>
+            <div class="form-status" id="form-status" role="alert"></div>
+          </form>
+        </div>
+
+        <aside class="contact-card" aria-label="Contact information">
+          <h3>Prefer to talk?</h3>
+          <p>Call or email us directly. We're happy to answer questions before you book.</p>
+          <a class="contact-line" data-site-href="phone" href="#">
+            <span class="ic" data-icon="phone"></span>
+            <span><small>Phone</small><strong data-site="phone"></strong></span>
+          </a>
+          <a class="contact-line" data-site-href="email" href="#">
+            <span class="ic" data-icon="mail"></span>
+            <span><small>Email</small><strong data-site="email"></strong></span>
+          </a>
+          <div class="contact-line">
+            <span class="ic" data-icon="clock"></span>
+            <span><small>Hours</small><strong data-site="hours" style="font-size:16px"></strong></span>
+          </div>
+          <div class="contact-line">
+            <span class="ic" data-icon="pin"></span>
+            <span><small>Service area</small><strong data-site="serviceArea" style="font-size:16px"></strong></span>
+          </div>
+          <div class="next-steps">
+            <h4>What happens next</h4>
+            <ol>
+              <li>We review your request and photos.</li>
+              <li>We call to schedule a site visit.</li>
+              <li>You get a clear, written estimate.</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
