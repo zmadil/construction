@@ -2,10 +2,10 @@
    SITE SETTINGS — edit these and every page updates.
    ========================================================================== */
 window.SITE = {
-  name: "Company Name",                       // TODO: real company name
-  tagline: "Construction & Property Services",
+  name: "Ramzey",
+  tagline: "Your Property, Our Priority",
   phone: "(555) 123-4567",                    // TODO
-  email: "info@example.com",                  // TODO
+  email: "info@ramzeycommercial.com",         // TODO: confirm this mailbox exists
   serviceArea: "Serving [City] and surrounding areas",   // TODO
   hours: "Mon–Fri 7am–6pm · Sat by appointment",         // TODO
   license: "License #000000",                 // TODO — or "" to hide

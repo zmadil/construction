@@ -1,10 +1,10 @@
-# Construction company website
+# Ramzey: ramzeycommercial.com
 
-Static site with plain HTML, CSS and JS and no build step. It's hosted the same way as RighteousFriend (GitHub Pages + `CNAME`).
+"Your Property, Our Priority." Commercial contractor website. Static site with plain HTML, CSS and JS and no build step. It's hosted the same way as RighteousFriend (GitHub Pages + `CNAME`).
 
 ```
 index.html        Home
-services.html     Services (each service has an anchor: #renovation, #concrete, …)
+services.html     Services (each service has an anchor matching its SERVICE_TYPES key: #renovation, #pressure-washing, …)
 work.html         Our Work (grid + filter by type, supports ?type=painting)
 project.html      Single project page (project.html?p=<slug>)
 about.html        Story, values, team, licensing & insurance
@@ -27,14 +27,22 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Before launch: checklist
 
-- [ ] `assets/js/site-config.js`: name, phone, email, service area, hours, license #, insurance wording
+- [x] Company name (Ramzey) and slogan in `site-config.js`
+- [ ] `assets/js/site-config.js`: phone, service area, hours, license #, insurance wording; confirm `info@ramzeycommercial.com` exists
 - [ ] Set `formEndpoint` (see below)
 - [ ] Replace placeholder photos (all `images.unsplash.com` URLs) with real ones:
       hero (`index.html`), intro photo, service images (`services.html`), team/owner (`about.html`)
-- [ ] Replace sample projects in `projects.js` with real jobs
+- [ ] Replace the placeholder commercial projects in `projects.js` with real jobs (client is picking photos/projects)
 - [ ] About page: real story, team names/roles/bios
-- [ ] `<title>` tags still say "Company Name" (main.js swaps it at runtime, but search engines read the raw HTML, so find-and-replace it)
-- [ ] Add `CNAME` with the domain, enable GitHub Pages
+- [ ] Add `CNAME` containing `ramzeycommercial.com` once DNS is pointed at GitHub Pages, then enable Pages
+
+## Services
+
+Ten categories, defined once in `SERVICE_TYPES` (`assets/js/projects.js`). Each key is used for the project filter chips, the footer links, the estimate form dropdown, the `services.html#<key>` anchor and the icon:
+
+`renovation`, `interior`, `demolition`, `concrete`, `asphalt`, `painting` (painting & striping), `maintenance`, `pressure-washing`, `landscaping` (landscaping & site work), `general-contracting`.
+
+If you add or rename one, also update the tile in `index.html`, the section in `services.html`, and the icon in `main.js`.
 
 ## Adding a project
 
@@ -45,7 +53,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 {
   slug: "driveway-replacement-pine-st",
   title: "Driveway Replacement",
-  types: ["concrete", "landscaping"],      // keys from SERVICE_TYPES
+  types: ["concrete", "demolition"],       // keys from SERVICE_TYPES
   location: "Pine Street",
   date: "2026-10",
   featured: false,                           // true = shows on home page
