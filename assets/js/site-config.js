@@ -4,6 +4,16 @@
 window.SITE = {
   name: "Ramzey",
   tagline: "Your Property, Our Priority",
+
+  /* LOGO: to change it, replace the image files in images/logo/ (keep the
+     same names), or point these at new files. Nothing else needs editing.
+       logo  the main logo, shown in the header and footer. Best as a PNG with a
+             transparent background, cropped tight (no empty border).
+             The footer turns a transparent logo white automatically. A logo
+             with a solid background is shown on a white tile instead.
+       icon  square version for the browser tab and phone home screen. */
+  logo: "images/logo/logo.png",
+  icon: "images/logo/icon.png",
   phone: "(555) 123-4567",                    // TODO
   email: "info@ramzeycommercial.com",         // TODO: confirm this mailbox exists
   serviceArea: "Serving [City] and surrounding areas",   // TODO

@@ -10,7 +10,8 @@ project.html      Single project page (project.html?p=<slug>)
 about.html        Story, values, team, licensing & insurance
 estimate.html     Request an Estimate form (supports ?type=concrete to preselect)
 assets/css/styles.css
-assets/js/site-config.js   ← company name, phone, email, license, form endpoint
+assets/js/site-config.js   ← company name, logo, phone, email, license, form endpoint
+images/logo/               logo.png (header + footer) and icon.png (browser tab)
 assets/js/projects.js      ← the project list ("blog posts")
 assets/js/main.js          header/footer, project rendering, gallery, form logic
 images/projects/<slug>/    real project photos go here
@@ -18,6 +19,15 @@ videos/                    self-hosted project videos (or use YouTube)
 ```
 
 Header, footer, phone numbers and emails all come from `site-config.js`, so editing that one file updates every page.
+
+## Changing the logo
+
+Replace the files in `images/logo/` and keep the same names. Every page picks them up, and no code needs to change.
+
+- `logo.png` is the main logo, shown in the header and footer. Use a PNG with a **transparent background**, cropped tight with no empty border. The footer is dark, so a transparent logo is turned white there automatically. A logo with a solid background is shown on a small white tile instead.
+- `icon.png` is a square version (512×512 is ideal) for the browser tab and phone home screen.
+
+To use a different file name or format (e.g. `logo.svg`), change `logo` / `icon` in `assets/js/site-config.js`. Set `logo: ""` to go back to the built-in icon with the company name as text.
 
 ## Run locally
 

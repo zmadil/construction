@@ -66,10 +66,40 @@
      Header, footer, mobile bar
      ------------------------------------------------------------------------ */
   function brandHTML() {
+    if (SITE.logo) {
+      return `<a class="brand" href="index.html"><img class="brand-logo" src="${esc(SITE.logo)}" alt="${esc(SITE.name)} home"></a>`;
+    }
     return `<a class="brand" href="index.html" aria-label="${esc(SITE.name)} home">
       <span class="brand-mark">${LOGO}</span>
       <span><span class="brand-name">${esc(SITE.name)}</span><span class="brand-tag">${esc(SITE.tagline)}</span></span>
     </a>`;
+  }
+
+  /* Footer is dark: show a transparent logo in white, anything else on a white tile */
+  function fitFooterLogo() {
+    const img = $(".site-footer .brand-logo");
+    if (!img) return;
+    img.classList.add("on-tile");
+    const check = () => {
+      try {
+        const c = document.createElement("canvas");
+        c.width = c.height = 1;
+        const ctx = c.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 40, 40);
+        if (ctx.getImageData(0, 0, 1, 1).data[3] < 10) img.classList.replace("on-tile", "on-dark");
+      } catch (e) { /* keep the tile */ }
+    };
+    img.complete && img.naturalWidth ? check() : img.addEventListener("load", check, { once: true });
+  }
+
+  function setIcon() {
+    if (!SITE.icon) return;
+    ["icon", "apple-touch-icon"].forEach((rel) => {
+      let link = document.querySelector(`link[rel="${rel}"]`);
+      if (!link) { link = document.createElement("link"); link.rel = rel; document.head.appendChild(link); }
+      link.removeAttribute("type");
+      link.href = SITE.icon;
+    });
   }
 
   function renderHeader() {
@@ -566,6 +596,8 @@
   /* ------------------------------------------------------------------------ */
   renderHeader();
   renderFooter();
+  fitFooterLogo();
+  setIcon();
   renderMobileBar();
   hydrate();
   renderFeatured();
