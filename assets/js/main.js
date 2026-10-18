@@ -26,6 +26,7 @@
     close: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
     chevL: svg('<path d="m15 18-6-6 6-6"/>'),
     chevR: svg('<path d="m9 18 6-6-6-6"/>'),
+    chevDown: svg('<path d="m6 9 6 6 6-6"/>'),
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
     upload: svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/>'),
     users: svg('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'),
@@ -55,10 +56,13 @@
 
   const NAV = [
     { href: "index.html", label: "Home", key: "home" },
-    { href: "services.html", label: "Services", key: "services" },
+    { href: "about.html", label: "Who We Are", key: "about" },
+    { href: "services.html", label: "Services", key: "services", sub: true },
     { href: "work.html", label: "Our Work", key: "work" },
-    { href: "about.html", label: "About", key: "about" }
+    { href: "contact.html", label: "Contact Us", key: "contact" }
   ];
+  // Services sub-menu: one link per SERVICE_TYPES entry → services.html#<key>
+  const serviceLinks = () => Object.entries(TYPES).map(([k, v]) => ({ href: `services.html#${k}`, label: v }));
 
   const page = document.body.dataset.page || "";
 
@@ -105,7 +109,12 @@
   function renderHeader() {
     const el = $("#site-header");
     if (!el) return;
-    const links = NAV.map((n) => `<li><a href="${n.href}"${n.key === page ? ' aria-current="page"' : ""}>${n.label}</a></li>`).join("");
+    const cur = (n) => (n.key === page ? ' aria-current="page"' : "");
+    const subList = (cls) => `<ul class="${cls}">${serviceLinks().map((l) => `<li><a href="${l.href}">${esc(l.label)}</a></li>`).join("")}</ul>`;
+
+    const links = NAV.map((n) => n.sub
+      ? `<li class="has-sub"><a href="${n.href}"${cur(n)}>${n.label}${ICONS.chevDown}</a>${subList("sub-menu")}</li>`
+      : `<li><a href="${n.href}"${cur(n)}>${n.label}</a></li>`).join("");
     el.className = "site-header";
     el.innerHTML = `
       <div class="container header-inner">
@@ -116,22 +125,50 @@
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           ${ICONS.menu}${ICONS.close.replace("<svg", '<svg class="icon-close"')}
         </button>
-      </div>
-      <div class="mobile-menu" id="mobile-menu">
-        <ul>${NAV.map((n) => `<li><a href="${n.href}"${n.key === page ? ' aria-current="page"' : ""}>${n.label}${ICONS.chevR.replace("<svg", '<svg width="22" height="22"')}</a></li>`).join("")}</ul>
-        <a class="btn btn-gold btn-lg" href="estimate.html">Request an Estimate</a>
-        <a class="btn btn-outline btn-lg" href="${telHref(SITE.phone)}">${ICONS.phone} ${esc(SITE.phone)}</a>
-        <a class="btn btn-outline btn-lg" href="mailto:${esc(SITE.email)}">${ICONS.mail} Email us</a>
       </div>`;
 
+    // The mobile menu lives outside the header: the header's backdrop-filter would
+    // otherwise trap this position:fixed panel inside the header's own box.
+    const chev = ICONS.chevR.replace("<svg", '<svg width="22" height="22"');
+    const menu = document.createElement("nav");
+    menu.className = "mobile-menu";
+    menu.id = "mobile-menu";
+    menu.setAttribute("aria-label", "Mobile");
+    menu.innerHTML = `
+      <ul>${NAV.map((n) => n.sub
+        ? `<li class="has-sub">
+             <div class="sub-row">
+               <a href="${n.href}"${cur(n)}>${n.label}</a>
+               <button type="button" class="sub-toggle" aria-expanded="false" aria-controls="mobile-services" aria-label="Show all services">${ICONS.chevDown}</button>
+             </div>
+             <div class="mobile-sub" id="mobile-services">${subList("")}</div>
+           </li>`
+        : `<li><a href="${n.href}"${cur(n)}>${n.label}${chev}</a></li>`).join("")}</ul>
+      <a class="btn btn-gold btn-lg" href="estimate.html">Request an Estimate</a>
+      <a class="btn btn-outline btn-lg" href="${telHref(SITE.phone)}">${ICONS.phone} ${esc(SITE.phone)}</a>
+      <a class="btn btn-outline btn-lg" href="mailto:${esc(SITE.email)}">${ICONS.mail} Email us</a>`;
+    el.after(menu);
+
     const toggle = $(".menu-toggle", el);
-    toggle.addEventListener("click", () => {
-      const open = document.body.classList.toggle("menu-open");
+    const setOpen = (open) => {
+      document.body.classList.toggle("menu-open", open);
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
+    };
+    toggle.addEventListener("click", () => setOpen(!document.body.classList.contains("menu-open")));
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && document.body.classList.contains("menu-open")) toggle.click();
+      if (e.key === "Escape" && document.body.classList.contains("menu-open")) { setOpen(false); toggle.focus(); }
+    });
+    // Close after following a link (matters for same-page #anchors on services.html)
+    menu.addEventListener("click", (e) => { if (e.target.closest("a")) setOpen(false); });
+    // Back to desktop width → make sure the page isn't left scroll-locked
+    matchMedia("(min-width: 901px)").addEventListener("change", (e) => { if (e.matches) setOpen(false); });
+
+    const subBtn = $(".sub-toggle", menu);
+    subBtn.addEventListener("click", () => {
+      const open = subBtn.getAttribute("aria-expanded") !== "true";
+      subBtn.setAttribute("aria-expanded", String(open));
+      subBtn.closest(".has-sub").classList.toggle("open", open);
     });
   }
 
@@ -447,22 +484,28 @@
   /* ------------------------------------------------------------------------
      Estimate form
      ------------------------------------------------------------------------ */
-  function initEstimateForm() {
-    const form = $("#estimate-form");
+  /* Shared by the estimate form and the (shorter) contact form.
+     The contact form has no type select or photo upload, so those parts are skipped. */
+  function initLeadForm() {
+    const form = $("#estimate-form") || $("#contact-form");
     if (!form) return;
+    const isContact = form.id === "contact-form";
 
     // Populate type-of-work options & preselect from ?type=
     const select = $("#type", form);
+    if (select) {
     select.insertAdjacentHTML("beforeend",
       Object.entries(TYPES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join("") +
       `<option value="multiple">Multiple / not sure</option>`);
     const pre = new URLSearchParams(location.search).get("type");
     if (pre && (TYPES[pre] || pre === "multiple")) select.value = pre;
+    }
 
     // Photo upload with previews
     const MAX_FILES = 8;
     const MAX_MB = 10;
     const input = $("#photos", form);
+    if (input) {
     const zone = $(".dropzone", form);
     const previews = $("#previews", form);
     const photoErr = $("#photos-error", form);
@@ -508,6 +551,7 @@
       syncInput();
       drawPreviews();
     });
+    }
 
     // Validation
     const rules = {
@@ -516,7 +560,7 @@
       email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || "Please enter a valid email.",
       address: (v) => v.trim().length > 4 || "Please enter the project address.",
       type: (v) => !!v || "Please choose a type of work.",
-      description: (v) => v.trim().length > 9 || "A few words about the project helps us prepare."
+      description: (v) => v.trim().length > 9 || (isContact ? "Please add a short message." : "A few words about the project helps us prepare.")
     };
     function validateField(name) {
       const el = form.elements[name];
@@ -527,6 +571,7 @@
       el.setAttribute("aria-invalid", String(res !== true));
       return res === true;
     }
+    Object.keys(rules).forEach((n) => { if (!form.elements[n]) delete rules[n]; });
     Object.keys(rules).forEach((n) => {
       form.elements[n].addEventListener("blur", () => { if (form.elements[n].value) validateField(n); });
       form.elements[n].addEventListener("input", () => { if (form.elements[n].closest(".invalid")) validateField(n); });
@@ -551,7 +596,8 @@
 
       const data = new FormData(form);
       data.delete("website");
-      data.set("typeLabel", TYPES[data.get("type")] || data.get("type"));
+      data.set("formType", isContact ? "contact" : "estimate");
+      if (data.has("type")) data.set("typeLabel", TYPES[data.get("type")] || data.get("type"));
       data.set("submittedAt", new Date().toISOString());
       data.set("page", location.href);
 
@@ -566,7 +612,9 @@
           <div class="form-success" role="status">
             <div class="big-tick">${ICONS.check}</div>
             <h2>Thanks, ${first}!</h2>
-            <p class="lead">We've received your request and will be in touch within one business day to set up a time to look at the project.</p>
+            <p class="lead">${isContact
+              ? "We've received your message and will get back to you within one business day."
+              : "We've received your request and will be in touch within one business day to set up a time to look at the project."}</p>
             <p>Need us sooner? Call <a href="${telHref(SITE.phone)}"><strong>${esc(SITE.phone)}</strong></a>.</p>
             <a class="btn btn-navy" href="work.html">Browse our work</a>
           </div>`;
@@ -603,6 +651,6 @@
   renderFeatured();
   renderWork();
   renderProject();
-  initEstimateForm();
+  initLeadForm();
   observeReveals();
 })();

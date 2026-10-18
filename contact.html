@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | Ramzey</title>
+  <meta name="description" content="Contact Ramzey about commercial renovation, concrete, paving, striping, pressure washing, maintenance or site work.">
+  <meta name="theme-color" content="#142c3e">
+  <link rel="icon" href="images/logo/icon.png">
+  <link rel="apple-touch-icon" href="images/logo/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="contact" class="page-estimate">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Contact Us</span>
+        <h1>Let's talk about your property</h1>
+        <p>Questions, service calls or a new project. Send us a message or call, and we'll get back to you within one business day.</p>
+      </div>
+    </section>
+
+    <section class="section bg-paper">
+      <div class="container estimate-layout">
+        <div class="form-card" id="form-card">
+          <h2>Send us a message</h2>
+          <p>Need a price for a specific job? <a href="estimate.html">Request an estimate</a> instead, where you can add photos.</p>
+
+          <form id="contact-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Name <span class="req">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="company">Company / property name <span class="opt">(optional)</span></label>
+                <input id="company" name="company" type="text" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="req">*</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="req">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="field full">
+                <label for="description">Message <span class="req">*</span></label>
+                <textarea id="description" name="description" placeholder="How can we help?" required></textarea>
+                <span class="field-error" role="alert"></span>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="website">Leave this empty</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-foot">
+              <button class="btn btn-gold btn-lg" type="submit">Send Message <span data-icon="arrow"></span></button>
+              <small>We'll only use your details to respond to your message.</small>
+            </div>
+            <div class="form-status" id="form-status" role="alert"></div>
+          </form>
+        </div>
+
+        <aside class="contact-card" aria-label="Contact information">
+          <h3>Reach us directly</h3>
+          <p>Prefer to talk? Call or email and you'll reach our team directly.</p>
+          <a class="contact-line" data-site-href="phone" href="#">
+            <span class="ic" data-icon="phone"></span>
+            <span><small>Phone</small><strong data-site="phone"></strong></span>
+          </a>
+          <a class="contact-line" data-site-href="email" href="#">
+            <span class="ic" data-icon="mail"></span>
+            <span><small>Email</small><strong data-site="email"></strong></span>
+          </a>
+          <div class="contact-line">
+            <span class="ic" data-icon="clock"></span>
+            <span><small>Hours</small><strong data-site="hours" style="font-size:16px"></strong></span>
+          </div>
+          <div class="contact-line">
+            <span class="ic" data-icon="pin"></span>
+            <span><small>Service area</small><strong data-site="serviceArea" style="font-size:16px"></strong></span>
+          </div>
+          <div class="next-steps">
+            <h4>Have a project in mind?</h4>
+            <p style="margin:0 0 16px;color:rgba(255,255,255,.8)">Send photos and details for a free, written estimate.</p>
+            <a class="btn btn-gold" href="estimate.html">Request an Estimate</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

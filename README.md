@@ -7,8 +7,9 @@ index.html        Home
 services.html     Services (each service has an anchor matching its SERVICE_TYPES key: #renovation, #pressure-washing, …)
 work.html         Our Work (grid + filter by type, supports ?type=painting)
 project.html      Single project page (project.html?p=<slug>)
-about.html        Story, values, team, licensing & insurance
+about.html        Who We Are: story, values, team, licensing & insurance
 estimate.html     Request an Estimate form (supports ?type=concrete to preselect)
+contact.html      Contact Us: short message form + phone/email/hours
 assets/css/styles.css
 assets/js/site-config.js   ← company name, logo, phone, email, license, form endpoint
 images/logo/               logo.png (header + footer) and icon.png (browser tab)
@@ -85,7 +86,9 @@ Projects with a video get a "Video" badge on their card.
 ## Estimate form
 
 The form POSTs `multipart/form-data` to `SITE.formEndpoint` with these fields:
-`name, company, phone, email, address, type, typeLabel, description, photos (0–8 files), submittedAt, page`.
+`name, company, phone, email, address, type, typeLabel, description, photos (0–8 files), formType, submittedAt, page`.
+
+The Contact Us form posts to the same endpoint with `formType=contact` and only `name, company, phone, email, description`. Estimate requests send `formType=estimate`.
 
 **Option A: n8n (recommended, already in use for RighteousFriend)**
 1. New workflow → **Webhook** node, method `POST`, path `estimate-request`,
