@@ -110,5 +110,5 @@ Spam protection: a hidden honeypot field (`website`). Add Cloudflare Turnstile l
 
 - Colours: navy `#142c3e`, accent `#d09500`, white, warm off-white `#f7f6f2` for alternating sections, darker navy `#0c1d2a` for the footer.
 - The gold doesn't have enough contrast for text on white, so gold buttons use navy text. Small accent text on white uses a darker gold `#8a6400`.
-- Fonts: Barlow Condensed (headings) + Inter (body), via Google Fonts.
+- Font: Helvetica Neue (brand font), used from the visitor's device and not self-hosted, because the files we have aren't licensed for web use. Apple devices show it exactly; Windows/Android show Helvetica/Arial. If the client buys a Helvetica Neue **web** license, put its `.woff2` files in `assets/fonts/`, add `@font-face` rules at the top of `styles.css`, and remove `assets/fonts/` from `.gitignore`.
 - On phones: a hamburger menu plus a sticky bottom bar with **Call** and **Free Estimate** buttons.
