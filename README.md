@@ -26,7 +26,7 @@ Header, footer, phone numbers and emails all come from `site-config.js`, so edit
 Replace the files in `images/logo/` and keep the same names. Every page picks them up, and no code needs to change.
 
 - `logo.png` is the main logo, shown in the header and footer. Use a PNG with a **transparent background**, cropped tight with no empty border. The footer is dark, so a transparent logo is turned white there automatically. A logo with a solid background is shown on a small white tile instead.
-- `icon.png` is a square version (512×512 is ideal) for the browser tab and phone home screen.
+- `icon.png` is a square version (512×512 is ideal) for the browser tab and phone home screen. Give it a **solid background that fills the whole square**, with no transparent edges or see-through letters. In dark mode Chrome puts a white plate behind dark icons, and it shows through anything transparent.
 
 To use a different file name or format (e.g. `logo.svg`), change `logo` / `icon` in `assets/js/site-config.js`. Set `logo: ""` to go back to the built-in icon with the company name as text.
 
