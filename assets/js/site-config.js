@@ -15,7 +15,7 @@ window.SITE = {
   logo: "images/logo/logo.png",
   icon: "images/logo/icon.png",
   phone: "(555) 123-4567",                    // TODO
-  email: "info@ramzeycommercial.com",         // TODO: confirm this mailbox exists
+  email: "info@ramzeycommercial.com",
   serviceArea: "Serving [City] and surrounding areas",   // TODO
   hours: "Mon–Fri 7am–6pm · Sat by appointment",         // TODO
   license: "License #000000",                 // TODO — or "" to hide

@@ -4,7 +4,7 @@
 
 ```
 index.html        Home
-services.html     Services (each service has an anchor matching its SERVICE_TYPES key: #renovation, #pressure-washing, …)
+services.html     Services (each service has an anchor matching its SERVICE_TYPES key: #painting, #concrete-asphalt, …)
 work.html         Our Work (grid + filter by type, supports ?type=painting)
 project.html      Single project page (project.html?p=<slug>)
 about.html        Who We Are: story, values, team, licensing & insurance
@@ -38,8 +38,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Before launch: checklist
 
-- [x] Company name (Ramzey) and slogan in `site-config.js`
-- [ ] `assets/js/site-config.js`: phone, service area, hours, license #, insurance wording; confirm `info@ramzeycommercial.com` exists
+- [x] Company name (Ramzey), slogan and email in `site-config.js`
+- [ ] `assets/js/site-config.js`: phone, service area, hours, license #, insurance wording
 - [ ] Set `formEndpoint` (see below)
 - [ ] Replace placeholder photos (all `images.unsplash.com` URLs) with real ones:
       hero (`index.html`), intro photo, service images (`services.html`), team/owner (`about.html`)
@@ -49,9 +49,9 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Services
 
-Ten categories, defined once in `SERVICE_TYPES` (`assets/js/projects.js`). Each key is used for the project filter chips, the footer links, the estimate form dropdown, the `services.html#<key>` anchor and the icon:
+Six categories, defined once in `SERVICE_TYPES` (`assets/js/projects.js`). Each key is used for the project filter chips, the footer links, the estimate form dropdown, the `services.html#<key>` anchor and the icon:
 
-`renovation`, `interior`, `demolition`, `concrete`, `asphalt`, `painting` (painting & striping), `maintenance`, `pressure-washing`, `landscaping` (landscaping & site work), `general-contracting`.
+`painting` (Painting & Striping), `concrete-asphalt` (Concrete & Asphalt), `renovation` (Renovation & Build-Outs), `demolition` (Demolition & Site Clearance), `maintenance` (Maintenance & Repairs), `grounds` (Grounds & Exterior Care).
 
 If you add or rename one, also update the tile in `index.html`, the section in `services.html`, and the icon in `main.js`.
 
@@ -64,7 +64,7 @@ If you add or rename one, also update the tile in `index.html`, the section in `
 {
   slug: "driveway-replacement-pine-st",
   title: "Driveway Replacement",
-  types: ["concrete", "demolition"],       // keys from SERVICE_TYPES
+  types: ["concrete-asphalt", "grounds"],  // keys from SERVICE_TYPES
   location: "Pine Street",
   date: "2026-10",
   featured: false,                           // true = shows on home page

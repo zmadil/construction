@@ -21,16 +21,12 @@
    ========================================================================== */
 
 window.SERVICE_TYPES = {
-  renovation:            "Renovation & Build-Outs",
-  interior:              "Interior Work",
-  demolition:            "Demolition",
-  concrete:              "Concrete",
-  asphalt:               "Asphalt & Paving",
-  painting:              "Painting & Striping",
-  maintenance:           "Maintenance & Repairs",
-  "pressure-washing":    "Pressure Washing",
-  landscaping:           "Landscaping & Site Work",
-  "general-contracting": "General Contracting"
+  painting:           "Painting & Striping",
+  "concrete-asphalt": "Concrete & Asphalt",
+  renovation:         "Renovation & Build-Outs",
+  demolition:         "Demolition & Site Clearance",
+  maintenance:        "Maintenance & Repairs",
+  grounds:            "Grounds & Exterior Care"
 };
 
 // Placeholder photos until real project photos are supplied.
@@ -41,7 +37,7 @@ window.PROJECTS = [
   {
     slug: "office-suite-build-out",
     title: "Office Suite Build-Out",
-    types: ["renovation", "interior", "painting"],
+    types: ["renovation", "painting"],
     location: "Office park",
     date: "2026-08",
     featured: true,
@@ -62,7 +58,7 @@ window.PROJECTS = [
   {
     slug: "retail-parking-lot-repave",
     title: "Retail Parking Lot Repave & Restripe",
-    types: ["asphalt", "painting"],
+    types: ["concrete-asphalt", "painting"],
     location: "Shopping center",
     date: "2026-07",
     featured: true,
@@ -81,7 +77,7 @@ window.PROJECTS = [
   {
     slug: "tenant-improvement-medical-office",
     title: "Medical Office Tenant Improvement",
-    types: ["general-contracting", "interior", "renovation"],
+    types: ["renovation"],
     location: "Medical plaza",
     date: "2026-06",
     featured: true,
@@ -101,7 +97,7 @@ window.PROJECTS = [
   {
     slug: "sidewalk-curb-replacement",
     title: "Sidewalk & Curb Replacement",
-    types: ["concrete", "demolition"],
+    types: ["concrete-asphalt", "demolition"],
     location: "Commercial plaza",
     date: "2026-05",
     featured: false,
@@ -121,7 +117,7 @@ window.PROJECTS = [
   {
     slug: "parking-garage-cleaning-restripe",
     title: "Parking Garage Cleaning & Restripe",
-    types: ["pressure-washing", "painting", "maintenance"],
+    types: ["grounds", "painting", "maintenance"],
     location: "Downtown",
     date: "2026-04",
     featured: false,
@@ -140,7 +136,7 @@ window.PROJECTS = [
   {
     slug: "site-clearing-and-grading",
     title: "Demolition, Site Clearing & Grading",
-    types: ["demolition", "landscaping"],
+    types: ["demolition", "grounds"],
     location: "Industrial park",
     date: "2026-03",
     featured: false,
