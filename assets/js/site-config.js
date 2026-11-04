@@ -16,10 +16,10 @@ window.SITE = {
   icon: "images/logo/icon.png",
   phone: "(555) 123-4567",                    // TODO
   email: "info@ramzeycommercial.com",
-  serviceArea: "Serving [City] and surrounding areas",   // TODO
+  serviceArea: "Serving all of Texas",   // TODO
   hours: "Mon–Fri 7am–6pm · Sat by appointment",         // TODO
-  license: "License #000000",                 // TODO — or "" to hide
-  insured: "Fully insured · General liability & workers' comp", // TODO — confirm
+  license: "",                 // TODO — or "" to hide
+  insured: "Fully insured", // TODO — confirm
 
   /* Where the estimate form is sent (multipart/form-data, incl. photos).
      Options:
