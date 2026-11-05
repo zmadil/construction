@@ -21,10 +21,10 @@ window.SITE = {
   license: "",                 // TODO — or "" to hide
   insured: "Fully insured", // TODO — confirm
 
-  /* Where the estimate form is sent (multipart/form-data, incl. photos).
-     Options:
-       • n8n:       "https://n8nbronco.com/webhook/estimate-request"
-       • Formspree: "https://formspree.io/f/xxxxxxx" (photo uploads need a paid plan)
-     Leave "" while testing — the form will show a message instead of sending. */
+  /* Estimate & contact forms.
+     Leave "" (default): pressing Send opens the visitor's email app with a
+     pre-filled email to the address above. They press Send there.
+     Optional: set a form-service URL (e.g. "https://formspree.io/f/xxxxxxx")
+     to have the form send directly from the website instead. */
   formEndpoint: ""
 };

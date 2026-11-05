@@ -28,7 +28,6 @@
     chevR: svg('<path d="m9 18 6-6-6-6"/>'),
     chevDown: svg('<path d="m6 9 6 6 6-6"/>'),
     play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
-    upload: svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/>'),
     users: svg('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'),
     handshake: svg('<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/>'),
     ruler: svg('<path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/>'),
@@ -481,7 +480,7 @@
      Estimate form
      ------------------------------------------------------------------------ */
   /* Shared by the estimate form and the (shorter) contact form.
-     The contact form has no type select or photo upload, so those parts are skipped. */
+     The contact form has no type select, so that part is skipped. */
   function initLeadForm() {
     const form = $("#estimate-form") || $("#contact-form");
     if (!form) return;
@@ -495,58 +494,6 @@
       `<option value="multiple">Multiple / not sure</option>`);
     const pre = new URLSearchParams(location.search).get("type");
     if (pre && (TYPES[pre] || pre === "multiple")) select.value = pre;
-    }
-
-    // Photo upload with previews
-    const MAX_FILES = 8;
-    const MAX_MB = 10;
-    const input = $("#photos", form);
-    if (input) {
-    const zone = $(".dropzone", form);
-    const previews = $("#previews", form);
-    const photoErr = $("#photos-error", form);
-    let files = [];
-
-    function syncInput() {
-      const dt = new DataTransfer();
-      files.forEach((f) => dt.items.add(f));
-      input.files = dt.files;
-    }
-    function drawPreviews() {
-      previews.innerHTML = "";
-      files.forEach((f, i) => {
-        const d = document.createElement("div");
-        d.className = "preview";
-        const url = URL.createObjectURL(f);
-        d.innerHTML = `<img src="${url}" alt="${esc(f.name)}"><button type="button" aria-label="Remove ${esc(f.name)}" data-i="${i}">${ICONS.close}</button>`;
-        $("img", d).onload = () => URL.revokeObjectURL(url);
-        previews.appendChild(d);
-      });
-    }
-    function addFiles(list) {
-      const msgs = [];
-      Array.from(list).forEach((f) => {
-        if (!f.type.startsWith("image/")) return msgs.push(`${f.name} isn't an image.`);
-        if (f.size > MAX_MB * 1024 * 1024) return msgs.push(`${f.name} is over ${MAX_MB} MB.`);
-        if (files.length >= MAX_FILES) return msgs.push(`Up to ${MAX_FILES} photos.`);
-        if (!files.some((x) => x.name === f.name && x.size === f.size)) files.push(f);
-      });
-      photoErr.textContent = [...new Set(msgs)].join(" ");
-      zone.parentElement.classList.toggle("invalid", msgs.length > 0);
-      syncInput();
-      drawPreviews();
-    }
-    input.addEventListener("change", () => { const l = Array.from(input.files); addFiles(l); });
-    ["dragenter", "dragover"].forEach((ev) => zone.addEventListener(ev, (e) => { e.preventDefault(); zone.classList.add("drag"); }));
-    ["dragleave", "drop"].forEach((ev) => zone.addEventListener(ev, () => zone.classList.remove("drag")));
-    zone.addEventListener("drop", (e) => { e.preventDefault(); addFiles(e.dataTransfer.files); });
-    previews.addEventListener("click", (e) => {
-      const b = e.target.closest("button[data-i]");
-      if (!b) return;
-      files.splice(Number(b.dataset.i), 1);
-      syncInput();
-      drawPreviews();
-    });
     }
 
     // Validation
@@ -583,10 +530,40 @@
       if (bad.length) { form.elements[bad[0]].focus(); return; }
       if (form.elements.website.value) return; // honeypot
 
+      // No form service configured: open the visitor's email app with everything pre-filled.
       if (!SITE.formEndpoint) {
-        status.className = "form-status error";
-        status.innerHTML = `The online form isn't connected yet. Please call <a href="${telHref(SITE.phone)}">${esc(SITE.phone)}</a> or email <a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>.`;
-        console.warn("SITE.formEndpoint is empty — set it in assets/js/site-config.js");
+        const v = (n) => (form.elements[n] ? form.elements[n].value.trim() : "");
+        const typeLabel = v("type") ? (TYPES[v("type")] || (v("type") === "multiple" ? "Multiple / not sure" : v("type"))) : "";
+        const lines = [
+          ["Name", v("name")],
+          ["Company / property", v("company")],
+          ["Phone", v("phone")],
+          ["Email", v("email")],
+          ["Project address", v("address")],
+          ["Type of work", typeLabel]
+        ].filter(([, val]) => val).map(([k, val]) => `${k}: ${val}`);
+        const body = [
+          ...lines,
+          "",
+          isContact ? "Message:" : "Project description:",
+          v("description")
+        ].join("\r\n");
+        const subject = isContact
+          ? `Website message from ${v("name")}`
+          : `Estimate request: ${typeLabel || "project"} at ${v("address")}`;
+        const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailto;
+
+        const first = esc(v("name").split(" ")[0]);
+        $("#form-card").innerHTML = `
+          <div class="form-success" role="status">
+            <div class="big-tick">${ICONS.mail}</div>
+            <h2>Almost done, ${first}!</h2>
+            <p class="lead">Your email app should now be open with your ${isContact ? "message" : "request"} filled in. <strong>Just press Send.</strong></p>
+            <p>Email app didn't open? <a href="${esc(mailto)}">Try again</a>, email us at <a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a>, or call <a href="${telHref(SITE.phone)}"><strong>${esc(SITE.phone)}</strong></a>.</p>
+          </div>`;
+        window.scrollTo({ top: $("#form-card").getBoundingClientRect().top + scrollY - 100, behavior: "smooth" });
         return;
       }
 

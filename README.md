@@ -1,6 +1,6 @@
 # Ramzey: ramzeycommercial.com
 
-"Your Property, Our Priority." Commercial contractor website. Static site with plain HTML, CSS and JS and no build step. It's hosted the same way as RighteousFriend (GitHub Pages + `CNAME`).
+"Your Property, Our Priority." Commercial contractor website. Static site with plain HTML, CSS and JS and no build step. Hosted on GitHub Pages (`CNAME`).
 
 ```
 index.html        Home
@@ -40,7 +40,6 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 - [x] Company name (Ramzey), slogan and email in `site-config.js`
 - [ ] `assets/js/site-config.js`: phone, service area, hours, license #, insurance wording
-- [ ] Set `formEndpoint` (see below)
 - [ ] Replace placeholder photos (all `images.unsplash.com` URLs) with real ones:
       hero (`index.html`), intro photo, service images (`services.html`), team/owner (`about.html`)
 - [ ] Replace the placeholder commercial projects in `projects.js` with real jobs (client is picking photos/projects)
@@ -85,24 +84,16 @@ Projects with a video get a "Video" badge on their card.
 
 ## Estimate form
 
-The form POSTs `multipart/form-data` to `SITE.formEndpoint` with these fields:
-`name, company, phone, email, address, type, typeLabel, description, photos (0–8 files), formType, submittedAt, page`.
+By default (`formEndpoint: ""` in `site-config.js`), pressing Send validates the form and then opens the
+visitor's email app with a pre-filled email to `SITE.email`. The subject is "Estimate request: <type> at <address>"
+or "Website message from <name>". The body contains name, company, phone, email, address, type of work and description.
+The visitor presses Send in their email app.
 
-The Contact Us form posts to the same endpoint with `formType=contact` and only `name, company, phone, email, description`. Estimate requests send `formType=estimate`.
+The Contact Us form works the same way, without the type of work field.
 
-**Option A: n8n (recommended, already in use for RighteousFriend)**
-1. New workflow → **Webhook** node, method `POST`, path `estimate-request`,
-   *Options → Binary Property* = `photos` (n8n names them `photos0`, `photos1`, …).
-   Set *Respond* to "Immediately" or add a *Respond to Webhook* node returning `{"ok":true}`.
-   Allow CORS from the site's domain (Webhook → Options → Allowed Origins).
-2. Add a **Send Email** / Gmail node to the owner with the fields in the body and the binaries attached.
-   Optionally add a Google Sheets node to log every lead.
-3. Put the production URL in `site-config.js`:
-   `formEndpoint: "https://n8nbronco.com/webhook/estimate-request"`
-
-**Option B: Formspree.** Use `https://formspree.io/f/<id>`. File uploads require a paid plan.
-
-While `formEndpoint` is empty, submitting shows a "call or email us" message instead of failing silently.
+**Optional: send directly from the site.** Set `formEndpoint` to a form-service URL (e.g. Formspree,
+`https://formspree.io/f/<id>`). The form then POSTs `multipart/form-data` with
+`name, company, phone, email, address, type, typeLabel, description, formType, submittedAt, page`.
 
 Spam protection: a hidden honeypot field (`website`). Add Cloudflare Turnstile later if needed.
 
