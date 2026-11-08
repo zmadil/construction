@@ -14,7 +14,7 @@ window.SITE = {
        icon  square version for the browser tab and phone home screen. */
   logo: "images/logo/logo.png",
   icon: "images/logo/icon.png",
-  phone: "(555) 123-4567",                    // TODO
+  phone: "(346) 916-8197",                    // TODO
   email: "info@ramzeycommercial.com",
   serviceArea: "Serving all of Texas",   // TODO
   hours: "Mon–Fri 7am–6pm · Sat by appointment",         // TODO
