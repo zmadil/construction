@@ -203,7 +203,7 @@
         </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} ${esc(SITE.name)}. All rights reserved.</span>
-          <span>Licensed &amp; insured</span>
+          <!--<span>Licensed &amp; insured</span>-->
         </div>
       </div>`;
   }
