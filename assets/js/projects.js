@@ -75,18 +75,20 @@ window.PROJECTS = [
     ]
   },
   {
-    slug: "tenant-improvement-medical-office",
-    title: "Medical Office Tenant Improvement",
+    slug: "dental-practice-exterior-renovation",
+    title: "Dental Practice Exterior Renovation",
     types: ["renovation"],
-    location: "Medical plaza",
-    date: "2026-06",
+    location: "Lake Jackson",
+    date: "2026-10",
     featured: true,
-    summary: "Managed a full tenant improvement for a medical office, from framing and finishes to final inspection.",
+    summary: "Delivered a complete exterior restoration of a standalone dental office, from structural repairs and a new roofline to a full repaint and refreshed grounds.",
     scope: [
-      "Project management, scheduling and permitting",
-      "Framing, drywall and finish carpentry",
-      "Coordination of electrical and plumbing subcontractors",
-      "Final punch list and inspection walkthrough"
+      "Removal of outdated aluminum awnings and restoration of the building's facade",
+      "Structural carpentry: replacement of all termite-damaged and rotted timber",
+      "Complete canopy rebuild with new angled shingle roofing and a custom drainage and runoff system",
+      "Full building exterior and monument sign repaint",
+      "Pressure washing of the building, walkways and parking lot, followed by full lot restriping",
+      "Pest remediation, including termite treatment and complete wasp nest removal"
     ],
     images: [
       { src: ph("photo-1587582423116-ec07293f0395"), alt: "Carpenter framing walls on a job site", caption: "Framing" },
