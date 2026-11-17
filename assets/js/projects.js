@@ -34,7 +34,7 @@ const ph = (id, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=
 
 // PLACEHOLDER PROJECTS: filler content until the client picks real jobs.
 window.PROJECTS = [
-  {
+  /*{
     slug: "office-suite-build-out",
     title: "Office Suite Build-Out",
     types: ["renovation", "painting"],
@@ -54,7 +54,7 @@ window.PROJECTS = [
       { src: ph("photo-1497366216548-37526070297c"), alt: "Finished office corridor with kitchenette", caption: "Corridor and break area" },
       { src: ph("photo-1600508774634-4e11d34730e2"), alt: "Open-plan office workspace", caption: "Open workspace" }
     ]
-  },
+  },*/
   {
     slug: "retail-parking-lot-repave",
     title: "Retail Parking Lot Repave & Restripe",
