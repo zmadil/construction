@@ -115,25 +115,26 @@ window.PROJECTS = [
     ]
   },
   {
-    slug: "parking-garage-cleaning-restripe",
-    title: "Parking Garage Cleaning & Restripe",
+    slug: "commerce-centre-exterior-property-revitalization",
+    title: "Commerce Centre Exterior Property Revitalization",
     types: ["grounds", "painting", "maintenance"],
-    location: "Downtown",
-    date: "2026-04",
+    location: "Uptown Houston",
+    date: "2026-10",
     featured: false,
-    summary: "Pressure washed a multi-level parking garage, repainted columns and restriped every level overnight.",
+    summary: "Striped the full parking lot and pressure washed, landscaped and renovated the surrounding common areas.",
     scope: [
-      "Hot-water pressure washing of all decks",
-      "Column and curb painting",
-      "Stall, arrow and wayfinding striping",
-      "Night shifts to avoid closing the garage"
+      "Full parking lot striping: stalls, cross sections, fire lanes and handicap spaces",
+      "Pre-treated concrete for grime, weeds and stains, then pressure washed sidewalks and common seating areas",
+      "Landscape renovation with 2-3 inches of fresh black mulch and full turf renovation",
+      "Hardscaping with white limestone rock accents",
+      "Weed and chemical treatment across the property"
     ],
     images: [
       { src: ph("photo-1590674899484-d5640e854abe"), alt: "Parking garage with freshly painted columns and lines", caption: "Finished level" },
       { src: ph("photo-1635424710928-0544e8512eae"), alt: "Worker using a pressure hose", caption: "Pressure washing" }
     ]
   },
-  {
+  /*{
     slug: "site-clearing-and-grading",
     title: "Demolition, Site Clearing & Grading",
     types: ["demolition", "grounds"],
@@ -152,5 +153,5 @@ window.PROJECTS = [
       { src: ph("photo-1517089596392-fb9a9033e05b"), alt: "Aerial view of earthwork and grading", caption: "Grading" },
       { src: ph("photo-1574958269340-fa927503f3dd"), alt: "Modern commercial building with landscaped plaza", caption: "Finished site (example)" }
     ]
-  }
+  }*/
 ];
