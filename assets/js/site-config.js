@@ -3,7 +3,7 @@
    ========================================================================== */
 window.SITE = {
   name: "Ramzey",
-  tagline: "Your Property, Our Priority",
+  tagline: "The Last Contractor You'll Need To Hire",
 
   /* LOGO: to change it, replace the image files in images/logo/ (keep the
      same names), or point these at new files. Nothing else needs editing.
