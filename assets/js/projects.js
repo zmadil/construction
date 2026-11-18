@@ -77,7 +77,7 @@ window.PROJECTS = [
   {
     slug: "dental-practice-exterior-renovation",
     title: "Dental Practice Exterior Renovation",
-    types: ["renovation, painting, demolition"],
+    types: ["renovation", "painting", "demolition"],
     location: "Lake Jackson, TX",
     date: "2026-10",
     featured: true,
