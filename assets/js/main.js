@@ -177,7 +177,7 @@
         <div class="footer-grid">
           <div>
             ${brandHTML()}
-            <p>${esc(SITE.tagline)}. Painting, paving, renovation, demolition, maintenance and grounds care from one accountable contractor.</p>
+            <p>${esc(SITE.tagline)}. Painting, renovation, demolition, maintenance, and grounds care from one accountable contractor.</p>
             ${SITE.license ? `<p style="margin:0;font-size:14px;color:rgba(255,255,255,.6)">${esc(SITE.license)} · ${esc(SITE.insured)}</p>` : ""}
           </div>
           <div>
