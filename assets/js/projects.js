@@ -40,7 +40,7 @@ window.PROJECTS = [
     types: ["renovation", "painting"],
     location: "Office park",
     date: "2026-08",
-    featured: true,
+    featured: false,
     summary: "Turned an empty shell space into a finished office suite with glass-front meeting rooms, open workspace and a break area.",
     scope: [
       "Metal stud framing and drywall for offices and meeting rooms",
@@ -55,13 +55,13 @@ window.PROJECTS = [
       { src: ph("photo-1600508774634-4e11d34730e2"), alt: "Open-plan office workspace", caption: "Open workspace" }
     ]
   },*/
-  {
+  /*{
     slug: "retail-parking-lot-repave",
     title: "Retail Parking Lot Repave & Restripe",
     types: ["concrete-asphalt", "painting"],
     location: "Shopping center",
     date: "2026-07",
-    featured: true,
+    featured: false,
     summary: "Milled and repaved a worn retail parking lot, then restriped stalls, ADA spaces and fire lanes.",
     scope: [
       "Milling and base repair in failed areas",
@@ -73,12 +73,12 @@ window.PROJECTS = [
       { src: ph("photo-1506521781263-d8422e82f27a"), alt: "Aerial view of a freshly striped parking lot", caption: "Finished striping" },
       { src: ph("photo-1503708928676-1cb796a0891e"), alt: "Excavator beside newly paved asphalt", caption: "Paving in progress" }
     ]
-  },
+  },*/
   {
     slug: "dental-practice-exterior-renovation",
     title: "Dental Practice Exterior Renovation",
     types: ["renovation"],
-    location: "Lake Jackson",
+    location: "Lake Jackson, TX",
     date: "2026-10",
     featured: true,
     summary: "Delivered a complete exterior restoration of a standalone dental office, from structural repairs and a new roofline to a full repaint and refreshed grounds.",
@@ -97,18 +97,19 @@ window.PROJECTS = [
     ]
   },
   {
-    slug: "sidewalk-curb-replacement",
-    title: "Sidewalk & Curb Replacement",
+    slug: "industrial-warehouse-concrete-rehabilitation",
+    title: "Industrial Warehouse Concrete Rehabilitation",
     types: ["concrete-asphalt", "demolition"],
-    location: "Commercial plaza",
-    date: "2026-05",
-    featured: false,
-    summary: "Removed cracked, uneven sidewalks and curbs around a commercial plaza and poured new reinforced concrete.",
+    location: "Multiple Locations, Houston, TX",
+    date: "2026-08",
+    featured: true,
+    summary: "Repaired deteriorated concrete at loading dock walls and other areas across multiple buildings, including rebar restoration, concrete patching, and soffit replacement.",
     scope: [
-      "Saw-cutting and removal of damaged concrete",
-      "Compacted base and new forms",
-      "Reinforced sidewalk and curb pours",
-      "ADA-compliant ramps at crossings"
+       "Chipping out damaged concrete at tilt-up wall loading dock areas",
+       "Repair and treatment of exposed rebar, including priming and protective coating",
+       "Concrete placement, grinding, and smoothing to match existing surfaces",
+       "Repair of 25+ spots of exposed rebar caused by deterioration",
+       "Soffit repair and replacement at damaged areas"
     ],
     images: [
       { src: ph("photo-1504307651254-35680f356dfd"), alt: "Rebar set before a concrete pour", caption: "Reinforcement before the pour" },
@@ -120,9 +121,9 @@ window.PROJECTS = [
     slug: "commerce-centre-exterior-property-revitalization",
     title: "Commerce Centre Exterior Property Revitalization",
     types: ["grounds", "painting", "maintenance"],
-    location: "Uptown Houston",
+    location: "Uptown Houston, TX",
     date: "2026-10",
-    featured: false,
+    featured: true,
     summary: "Striped the full parking lot and pressure washed, landscaped and renovated the surrounding common areas.",
     scope: [
       "Full parking lot striping: stalls, cross sections, fire lanes and handicap spaces",
